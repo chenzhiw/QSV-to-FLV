@@ -7,6 +7,7 @@
 #include <ctime>
 #include <vector>
 #include <chrono>
+#include <cstring>
 #include <filesystem>
 
 using std::chrono::system_clock;
@@ -165,7 +166,7 @@ struct FileWrap
 	int read(char *buffer, int size)
 	{
 		int count = 0;
-		//ÄÜÌá¹©µÄ×Ö½Ú
+		//èƒ½æä¾›çš„å­—èŠ‚
 		int a = currentBufferSize - it;
 
 		if (a >= size)
@@ -177,7 +178,7 @@ struct FileWrap
 		}
 		else
 		{
-			//»¹²îµÄ×Ö½Ú
+			//è¿˜å·®çš„å­—èŠ‚
 			int b = size - a;
 			if (buffer != nullptr)
 				memcpy(buffer, data + it, a);
@@ -644,10 +645,10 @@ int Transcode(const char * src, const char * des)
 	try
 	{
 		MetaData meta;
-		//´ÓqsvÎÄ¼şÖĞÌáÈ¡²»º¬ÔªĞÅÏ¢µÄflvÊı¾İ
+		//ä»qsvæ–‡ä»¶ä¸­æå–ä¸å«å…ƒä¿¡æ¯çš„flvæ•°æ®
 		CreateTempFile(src, meta);
 
-		//½«ÌáÈ¡µ½µÄflvÊı¾İÁ¬Í¬ÔªĞÅÏ¢Ğ´ÈëÄ¿±êÎÄ¼ş
+		//å°†æå–åˆ°çš„flvæ•°æ®è¿åŒå…ƒä¿¡æ¯å†™å…¥ç›®æ ‡æ–‡ä»¶
 		CreateFlvFile(src, des, meta);
 
 	}
